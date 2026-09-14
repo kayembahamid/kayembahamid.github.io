@@ -2,340 +2,471 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kayemba Hamiidu: Security Engineer / Red Team &amp; Penetration Testing</title>
-<meta name="description" content="Kayemba Hamiidu, Security Engineer specializing in web application &amp; API penetration testing, red team methodology, and offensive security automation.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0b0c">
+<meta name="color-scheme" content="dark">
+<title>Kayemba Hamiidu | Security Engineer, Offensive Security &amp; AI Systems</title>
+<meta name="description" content="Security engineer working across web and API penetration testing, red team methodology, offensive security automation, and AI systems.">
+<meta name="author" content="Kayemba Hamiidu">
+<meta name="keywords" content="Kayemba Hamiidu,security engineer,penetration testing,red team,offensive security,API security,AI security,hamcodes">
+<link rel="canonical" href="https://kayembahamid.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kayemba Hamiidu | Security Engineer, Offensive Security &amp; AI Systems">
+<meta property="og:description" content="Security engineer working across web and API penetration testing, red team methodology, offensive security automation, and AI systems.">
+<meta property="og:url" content="https://kayembahamid.github.io/">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#128272;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=" js";</script>
 <link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Kayemba Hamiidu","url":"https://kayembahamid.github.io","email":"mailto:ham@hamcodes.com","jobTitle":"Security Engineer","knowsAbout":["Penetration testing","API security","Red team methodology","Offensive security automation","AI security"],"sameAs":["https://github.com/kayembahamid","https://www.linkedin.com/in/cyberhamcodes/","https://hamcodes.com","https://cyberhamcodes.substack.com/"]}
+</script>
 </head>
 <body>
 
-<canvas id="bg-canvas"></canvas>
+<div class="scanlines"></div>
+<div class="vignette"></div>
 
-<header class="nav" id="top">
-  <div class="nav-inner">
-    <a href="#top" class="brand">root<span class="accent">@</span>ham<span class="cursor">_</span></a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#about">whoami</a>
-      <a href="#skills">skills</a>
-      <a href="#experience">experience</a>
-      <a href="#certifications">certs</a>
-      <a href="#projects">projects</a>
-      <a href="#contact">contact</a>
-      <a href="assets/Kayemba_Hamiidu_Security_Engineer_Resume.pdf" class="btn-ghost" target="_blank" rel="noopener">resume.pdf</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+<!-- BOOT SCREEN -->
+<section class="boot-screen" id="bootScreen" aria-busy="true" aria-label="Loading portfolio">
+  <div class="boot-content">
+    <p class="boot-command"><span>root@hamcodes</span><b>:~$</b> ./portfolio</p>
+    <p class="boot-loading">loading portfolio...</p>
+    <div class="boot-progress" aria-live="polite">
+      <span class="boot-bar" aria-hidden="true"><i id="bootFill"></i><em id="bootRest"></em></span>
+      <span class="boot-pct" id="bootPct">0%</span>
+    </div>
+    <ul class="boot-modules" id="bootModules" aria-label="Portfolio modules">
+      <li data-state="pending" data-module="profile"><span aria-hidden="true">-</span><span class="boot-module-entry"><span class="boot-module-name">profile</span><span class="boot-module-leader" aria-hidden="true"></span></span><b>pending</b></li>
+      <li data-state="pending" data-module="projects"><span aria-hidden="true">-</span><span class="boot-module-entry"><span class="boot-module-name">projects</span><span class="boot-module-leader" aria-hidden="true"></span></span><b>pending</b></li>
+      <li data-state="pending" data-module="experience"><span aria-hidden="true">-</span><span class="boot-module-entry"><span class="boot-module-name">experience</span><span class="boot-module-leader" aria-hidden="true"></span></span><b>pending</b></li>
+      <li data-state="pending" data-module="skills"><span aria-hidden="true">-</span><span class="boot-module-entry"><span class="boot-module-name">skills</span><span class="boot-module-leader" aria-hidden="true"></span></span><b>pending</b></li>
+      <li data-state="pending" data-module="contact"><span aria-hidden="true">-</span><span class="boot-module-entry"><span class="boot-module-name">contact</span><span class="boot-module-leader" aria-hidden="true"></span></span><b>pending</b></li>
+    </ul>
   </div>
+</section>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a class="identity" href="#top" aria-label="Go to top">
+    <span class="status-dot"></span><span>root@hamcodes</span><span class="identity-path">:~/</span>
+  </a>
+  <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+    <a href="#about">about</a>
+    <a href="#projects">projects</a>
+    <a href="#experience">experience</a>
+    <a href="#skills">skills</a>
+    <a href="#writing">writing</a>
+    <a href="#contact">contact</a>
+  </nav>
 </header>
 
 <main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <p class="mono muted hero-kicker">$ whoami</p>
-      <h1 class="hero-name">Kayemba Hamiidu</h1>
-      <p class="hero-type"><span id="typeTarget"></span><span class="cursor">|</span></p>
-      <p class="hero-desc">Web &amp; API penetration testing, red team methodology, and offensive security automation, grounded in 5+ years of hands-on infrastructure &amp; application security practice.</p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Get in touch</a>
-        <a href="assets/Kayemba_Hamiidu_Security_Engineer_Resume.pdf" class="btn btn-ghost" target="_blank" rel="noopener">Download résumé</a>
-      </div>
-      <div class="hero-social">
-        <a href="https://hacker.hamcodes.com" target="_blank" rel="noopener" aria-label="Hacker's Notes" title="Hacker's Notes">HN</a>
-        <a href="https://labs.hamcodes.com" target="_blank" rel="noopener" aria-label="Hacker's Methodology Labs" title="Hacker's Methodology">LB</a>
-        <a href="https://thefilter.hamcodes.com/" target="_blank" rel="noopener" aria-label="THEFILTER" title="THEFILTER">AI</a>
-        <a href="https://netizen.hamcodes.com/" target="_blank" rel="noopener" aria-label="Netizen" title="Netizen">NT</a>
-        <a href="https://github.com/kayembahamid" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">GH</a>
-        <a href="https://www.linkedin.com/in/cyberhamcodes/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">IN</a>
-        <a href="https://hamcodes.gitbook.io/hackersnotes" target="_blank" rel="noopener" aria-label="HackersNotes" title="HackersNotes">GB</a>
-        <a href="https://cyberhamcodes.substack.com/" target="_blank" rel="noopener" aria-label="Substack" title="Substack">SS</a>
-        <a href="https://hamcodes.gitbook.io/robotics-projects-build-your-own-robot-at-home" target="_blank" rel="noopener" aria-label="DIYROBOTICS" title=" DIY ROBOTICS">RB</a>
-        <a href="https://hamcodes.gitbook.io/how-to-teach-my-kid-coding-at-home-without-knowing-how-to-code." target="_blank" rel="noopener" aria-label="My First Coding Lesson" title=" Coding for Educators">CE</a>
-        <a href="https://brotobro.hamcodes.com/" target="_blank" rel="noopener" aria-label="Bro to Bro" title="Bro to Bro">BB</a>
-        <a href="https://higarten.hamcodes.com/" target="_blank" rel="noopener" aria-label="Higarten" title="Higarten">HG</a>
-        <a href="https://hamcodes.com/" target="_blank" rel="noopener" aria-label="hamcodes" title="hamcodes">HC</a>
-        <a href="mailto:ham@hamcodes.com" aria-label="Email" title="Email">@</a>
-      </div>
-    </div>
-    <a href="#about" class="scroll-cue" aria-label="Scroll down">↓ scroll</a>
-  </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="section">
-    <p class="section-kicker mono">01 // profile</p>
-    <h2 class="section-title">About Me</h2>
-    <div class="card card-big about-card">
-      <p>
-        Security-focused engineer with hands-on experience in <strong class="hl">web application penetration testing</strong>,
-        <strong class="hl">API security testing</strong>, Linux systems, cloud fundamentals, and secure infrastructure practices.
-        Comfortable across the offensive security lifecycle: recon, vulnerability assessment, exploitation attempts against
-        lab &amp; sanctioned targets, and clear-language security reporting, using OWASP-aligned methodology.
-      </p>
-      <p>
-        Background bridges technical education and applied security: 5+ years designing hands-on cybersecurity labs
-        (Active Directory, Docker, virtualized networks) and training programs, paired with independent security research
-        across PortSwigger, TryHackMe, and Hack The Box. Strong self-driven learner with a builder mindset, combining
-        offensive security knowledge with automation (Python, Bash) and practical software development.
-      </p>
-      <div class="stat-row">
-        <div class="stat"><span class="stat-num">5+</span><span class="stat-label">years security &amp; tech</span></div>
-        <div class="stat"><span class="stat-num">OWASP</span><span class="stat-label">Top 10 methodology</span></div>
-        <div class="stat"><span class="stat-num">AD·Docker</span><span class="stat-label">home lab stack</span></div>
-        <div class="stat"><span class="stat-num">PY·BASH</span><span class="stat-label">automation</span></div>
-      </div>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="prompt hero-prompt"><span>root@hamcodes</span>:<b>~</b>$ whoami<span class="cursor"></span></div>
+  <h1 id="hero-title" class="ascii-name"><span class="sr-only">Kayemba Hamiidu | Security Engineer, Offensive Security &amp; AI Systems</span><span aria-hidden="true">░██                                                         ░██                                ░██    ░██
+░██                                                         ░██                                ░██    ░██
+░██   ░██   ░██████   ░██    ░██  ░██████   ░█████████████  ░████████   ░██████                ░██    ░██
+░██  ░██         ░██  ░██    ░██ ░██   ░██  ░██   ░██   ░██ ░██    ░██       ░██               ░█████████
+░█████      ░███████  ░██    ░██ ░████████  ░██   ░██   ░██ ░██    ░██  ░███████               ░██    ░██
+░██  ░██   ░██   ░██  ░██   ░███ ░██        ░██   ░██   ░██ ░██    ░██ ░██   ░██               ░██    ░██
+░██   ░██   ░█████░██  ░█████░██  ░██████   ░██   ░██   ░██ ░████████   ░█████░██     ░██      ░██    ░██
+                             ░██
+                       ░███████</span></h1>
 
-  <!-- SKILLS -->
-  <section id="skills" class="section">
-    <p class="section-kicker mono">02 // arsenal</p>
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
+  <div class="hero-details">
+    <p class="hero-role">Security Engineer &middot; Offensive Security &amp; AI Systems</p>
+    <p class="hero-focus">Penetration Testing &bull; Red Team &bull; API Security &bull; AI</p>
 
-      <div class="card skill-card">
-        <h3 class="skill-cat cat-green">Offensive Security</h3>
-        <div class="tags">
-          <span class="tag tag-green">Web App Pentesting</span>
-          <span class="tag tag-green">API Security Testing</span>
-          <span class="tag tag-green">OWASP Top 10</span>
-          <span class="tag tag-green">Auth &amp; AuthZ Testing</span>
-          <span class="tag tag-green">Vulnerability Assessment</span>
-          <span class="tag tag-green">Ethical Hacking</span>
-          <span class="tag tag-green">Security Reporting</span>
-        </div>
-      </div>
-
-      <div class="card skill-card">
-        <h3 class="skill-cat cat-cyan">Infrastructure &amp; Cloud</h3>
-        <div class="tags">
-          <span class="tag tag-cyan">Linux Administration</span>
-          <span class="tag tag-cyan">Docker &amp; Containers</span>
-          <span class="tag tag-cyan">Active Directory</span>
-          <span class="tag tag-cyan">Networking (TCP/IP·DNS·VPN)</span>
-          <span class="tag tag-cyan">AWS</span>
-          <span class="tag tag-cyan">Azure</span>
-          <span class="tag tag-cyan">Google Cloud</span>
-          <span class="tag tag-cyan">Oracle Cloud</span>
-        </div>
-      </div>
-
-      <div class="card skill-card">
-        <h3 class="skill-cat cat-amber">Programming &amp; Automation</h3>
-        <div class="tags">
-          <span class="tag tag-amber">Python</span>
-          <span class="tag tag-amber">Bash</span>
-          <span class="tag tag-amber">JavaScript</span>
-          <span class="tag tag-amber">SQL</span>
-          <span class="tag tag-amber">Google Apps Script</span>
-          <span class="tag tag-amber">PHP</span>
-        </div>
-      </div>
-
-      <div class="card skill-card">
-        <h3 class="skill-cat cat-purple">Dev &amp; Deployment</h3>
-        <div class="tags">
-          <span class="tag tag-purple">GitHub</span>
-          <span class="tag tag-purple">VS Code</span>
-          <span class="tag tag-purple">REST APIs</span>
-          <span class="tag tag-purple">CI/CD exposure</span>
-          <span class="tag tag-purple">MySQL</span>
-          <span class="tag tag-purple">Node.js</span>
-        </div>
-      </div>
-
-      <div class="card skill-card">
-        <h3 class="skill-cat cat-magenta">Security Labs &amp; Platforms</h3>
-        <div class="tags">
-          <span class="tag tag-magenta">PortSwigger Web Security Academy</span>
-          <span class="tag tag-magenta">TryHackMe</span>
-          <span class="tag tag-magenta">Hack The Box</span>
-          <span class="tag tag-magenta">APIsec University Labs</span>
-          <span class="tag tag-magenta">Home Lab / Virtual Machines</span>
-        </div>
-      </div>
-
-      <div class="card skill-card">
-        <h3 class="skill-cat cat-red">Security Awareness &amp; Docs</h3>
-        <div class="tags">
-          <span class="tag tag-red">Curriculum Development</span>
-          <span class="tag tag-red">Technical Documentation</span>
-          <span class="tag tag-red">Security Awareness Training</span>
-          <span class="tag tag-red">Workshop Facilitation</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- EXPERIENCE / TIMELINE -->
-  <section id="experience" class="section">
-    <p class="section-kicker mono">03 // experience</p>
-    <h2 class="section-title">Experience </h2>
-    <div class="timeline">
-
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="card tl-card">
-          <p class="tl-date mono">Present</p>
-          <h3>Security &amp; Technology Educator / Independent Security Researcher</h3>
-          <p class="tl-org">International &amp; Private Schools: South Korea · Vietnam · UAE · Saudi Arabia · Japan · Canada Remote</p>
-          <ul>
-            <li>Conducted web application and API security testing using OWASP methodologies and structured security labs.</li>
-            <li>Built and maintained virtualized home lab environments (Linux, Docker, Active Directory, virtual machines) for security research and testing.</li>
-            <li>Developed and deployed web applications and backend systems using PHP, Python, JavaScript, and SQL.</li>
-            <li>Worked with GitHub deployments, cloud fundamentals, automation workflows, and containerized environments.</li>
-            <li>Researched vulnerability assessment methodologies, authentication systems, web application risk, and secure infrastructure practices.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="card tl-card">
-          <p class="tl-date mono">2023 to Present</p>
-          <h3>Private Technology Mentorship</h3>
-          <p class="tl-org">TECH MENTOR </p>
-          <ul>
-            <li> AI / MI Fundamentals <a class="hl" href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds"target="_blank" rel="noopener">Artificial Intelligence</a> </li>
-            <li> Robotics & Engineering <a class="hl" href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds"target="_blank" rel="noopener">Robotics</a> </li>
-            <li> Coding & Game Development <a class="hl" href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds"target="_blank" rel="noopener">Coding</a> </li> 
-            <li> Cyber Safety & Digital Citizenship <a class="hl" href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds"target="_blank" rel="noopener">Cyber Safety</a> </li>
-             <li> Projects & a Digital Portfolio <a class="hl" href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds"target="_blank" rel="noopener">Portfolio Footprint</a> </li>  
-          </ul>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="card tl-card">
-          <p class="tl-date mono">2020 </p>
-          <h3>Author &amp; Content Creator</h3>
-          <p class="tl-org">MY BOOKS on Amazon </p>
-          <ul>
-            <li>The Hacker’s Notes: How to Hack All-Tech. No Fluff. No Theory. Just Execution. <a class="hl" href="https://www.amazon.com/Hackers-Notes-All-Tech-Theory-Execution/dp/B0F5ZGFK1B/" target="_blank" rel="noopener">The HackersNotes</a> </li>
-            <li>Build A Bot: Robotics STEAM Projects for Beginners with 3D Design, Coding, and Arduino. <a class="hl" href="https://www.amazon.com/Build-Bot-Robotics-Projects-Beginners/dp/B0FMPCPZYP/" target="_blank" rel="noopener">DIY ROBOTICS</a> </li>
-            <li>Coding for Educators: A Practical Guide for Teaching Code to Students. <a class="hl" href="https://www.amazon.com/Coding-Educators-First-Code-Teachers/dp/B0F7GWSRJK/" target="_blank" rel="noopener">Coding for Educators</a> </li>
-            <li>Coding for Teens : My First Code .: From Scratch to Bots with Code.org! <a class="hl" href="https://www.amazon.com/gp/product/B0DGLP5JFM/" target="_blank" rel="noopener">Coding for Teens</a> </li>
-            <li>Coding for kids My First Code : From Scratch to Bots with Code.org! <a class="hl" href="https://www.amazon.com/Coding-kids-My-First-Code-ebook/dp/B0DFX4L8B5/" target="_blank" rel="noopener">Coding for kids My First Code</a> </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="card tl-card">
-          <p class="tl-date mono">2017 to Present</p>
-          <h3>Founder &amp; Technical Educator, Hamcodes</h3>
-          <p class="tl-org">hamcodes.com</p>
-          <ul>
-            <li>Designed and delivered cybersecurity, coding, and AI literacy training programs and hands-on labs.</li>
-            <li>Built practical laboratory environments using Linux, Docker, Active Directory, APIs, and virtual machines.</li>
-            <li>Authored technical publications and cybersecurity learning resources, including the free <a class="hl" href="https://labs.hamcodes.com" target="_blank" rel="noopener">Hacker's Methodology</a> and <a class="hl" href="https://hamcodes.gitbook.io/hackersnotes" target="_blank" rel="noopener">HackersNotes</a>.</li>
-            <li>Developed learning pathways for cybersecurity, programming, networking, and cloud technologies.</li>
-          </ul>
-        </div>
-      </div>
-      
-     
-
-    </div>
-  </section>
-
-  <!-- CERTIFICATIONS -->
-  <section id="certifications" class="section">
-    <p class="section-kicker mono">04 // certifications</p>
-    <h2 class="section-title">Certifications &amp; Training</h2>
-    <div class="cert-grid">
-      <div class="card cert-card"><span class="cert-org">TCM Security</span><span class="cert-name">Practical Ethical Hacking</span></div>
-      <div class="card cert-card"><span class="cert-org">APIsec University</span><span class="cert-name">API Security</span></div>
-      <div class="card cert-card"><span class="cert-org">TryHackMe</span><span class="cert-name">Learning Paths</span></div>
-      <div class="card cert-card"><span class="cert-org">Hack The Box</span><span class="cert-name">Labs</span></div>
-      <div class="card cert-card"><span class="cert-org">AWS</span><span class="cert-name">Cloud Fundamentals</span></div>
-      <div class="card cert-card"><span class="cert-org">Microsoft Azure</span><span class="cert-name">Fundamentals</span></div>
-      <div class="card cert-card"><span class="cert-org">Google Cloud</span><span class="cert-name">Fundamentals</span></div>
-      <div class="card cert-card"><span class="cert-org">Oracle Cloud</span><span class="cert-name">Fundamentals</span></div>
-      <div class="card cert-card"><span class="cert-org">The Odin Project</span><span class="cert-name">Full Stack Web Dev</span></div>
-      <div class="card cert-card"><span class="cert-org">CODE AI</span><span class="cert-name"> Verified Computer Science Educator</span></div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="section">
-    <p class="section-kicker mono">05 // projects</p>
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-      <a class="card project-card" href="https://hamcodes.com" target="_blank" rel="noopener">
-        <h3>Hamcodes</h3>
-        <p>Security &amp; STEAM education platform. Curricula, labs, and technical training resources.</p>
-        <span class="mono muted small">hamcodes.com →</span>
-      </a>
-      <a class="card project-card" href="https://thefilter.hamcodes.com" target="_blank" rel="noopener">
-        <h3>The Filter AI</h3>
-        <p>A game where you play the guardrail. Catch prompt injections and jailbreaks before they reach the model.</p>
-        <span class="mono muted small">thefilter.hamcodes.com →</span>
-      </a>
-      <a class="card project-card" href="https://hacker.hamcodes.com/hackers-python/" target="_blank" rel="noopener">
-        <h3>Hacker's Python</h3>
-        <p>Learn Python by building real security tools. Real Python execution in the browser, 32 lessons, no install.</p>
-        <span class="mono muted small">hacker.hamcodes.com/hackers-python →</span>
-      </a>
-      <a class="card project-card" href="https://netizen.hamcodes.com/digital-citizen/" target="_blank" rel="noopener">
-        <h3>The Digital Citizen</h3>
-        <p>Build real web pages with HTML, CSS, and JavaScript. A beginner course for ages 11 and up, live preview included.</p>
-        <span class="mono muted small">netizen.hamcodes.com/digital-citizen →</span>
-      </a>
-      <a class="card project-card" href="https://netizen.hamcodes.com" target="_blank" rel="noopener">
-        <h3>Digital Netizenship</h3>
-        <p>Choose-your-path games and courses teaching kids to code and stay safe online.</p>
-        <span class="mono muted small">netizen.hamcodes.com →</span>
-      </a>
-      <a class="card project-card" href="https://labs.hamcodes.com" target="_blank" rel="noopener">
-        <h3>Hacker's Methodology</h3>
-        <p>Free, structured methodology for learning offensive security. Recon through reporting.</p>
-        <span class="mono muted small">labs.hamcodes.com →</span>
-      </a>
-      <a class="card project-card" href="https://hamcodes.gitbook.io/hackersnotes" target="_blank" rel="noopener">
-        <h3>HackersNotes</h3>
-        <p>Running notebook of offensive security techniques, tooling, and lab write-ups.</p>
-        <span class="mono muted small">hamcodes.gitbook.io/hackersnotes →</span>
-      </a>
-      <a class="card project-card" href="https://higarten.hamcodes.com" target="_blank" rel="noopener">
-        <h3>Hi Garten</h3>
-        <p>Preschool English learning with Mimo &amp; Zubi. Courses, worksheets, and printable libraries.</p>
-        <span class="mono muted small">higarten.hamcodes.com →</span>
-      </a>
+    <div class="current">
+      <span>CURRENTLY</span>
+      <p><b>&gt;</b>building security + AI projects</p>
+      <p><b>&gt;</b>going deeper into offensive security</p>
+      <p><b>&gt;</b>testing web apps, APIs, and the systems under them</p>
     </div>
 
-    <h3 class="subheading">Open Source: <span class="mono muted small">pulled live from GitHub</span></h3>
-    <div class="projects-grid" id="ghRepos">
-      <p class="muted mono small" id="ghStatus">$ fetching github.com/kayembahamid ...</p>
-    </div>
-  </section>
+    <dl class="availability">
+      <div><dt>STATUS</dt><dd class="open"><i></i>OPEN</dd></div>
+      <div><dt>SEEKING</dt><dd>Security Engineer / Red Team / Penetration Testing</dd></div>
+      <div><dt>AVAILABLE</dt><dd>Now &middot; remote or relocation</dd></div>
+    </dl>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section">
-    <p class="section-kicker mono">06 // contact</p>
-    <h2 class="section-title">Let's talk</h2>
-    <div class="card card-big contact-card">
-      <p>Open to Security Engineer, Red Team, and Penetration Testing roles. Reach out directly, no forms, no gatekeeping.</p>
-      <div class="contact-links">
-        <a class="btn btn-primary" href="mailto:ham@hamcodes.com">ham@hamcodes.com</a>
-        <a class="btn btn-ghost" href="https://linkedin.com/in/kayemba-hamiidu" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn btn-ghost" href="https://x.com/Hamcodehacks" target="_blank" rel="noopener">X</a>
-        <a class="btn btn-ghost" href="https://www.youtube.com/@hamcodesCybersecurity" target="_blank" rel="noopener">YouTube</a>
-        <a class="btn btn-ghost" href="https://www.tiktok.com/@hamcodescybersecurity" target="_blank" rel="noopener">TikTok</a>
-        <a class="btn btn-ghost" href="https://discord.com/channels/@hamcodes" target="_blank" rel="noopener">Discord</a>
-        <a class="btn btn-ghost" href="https://www.facebook.com/profile.php?id=61555697920170" target="_blank" rel="noopener">facebook</a>
+    <div class="hero-actions">
+      <a href="#about">[ ENTER PORTFOLIO ]</a>
+      <a class="secondary" href="assets/Kayemba_Hamiidu_Security_Engineer_Resume.pdf" target="_blank" rel="noopener">[ RESUME &darr; ]</a>
+      <span>or scroll &darr;</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="terminal-section" data-revealed="false">
+  <div class="prompt"><span>root@hamcodes</span>:<b>~/about</b>$ cat profile.yaml</div>
+  <div>
+    <h2 class="sr-only">About</h2>
+    <div class="terminal-window">
+      <div class="window-title"><i></i><i></i><i></i><span>~/about/profile.yaml</span></div>
+      <div class="yaml-lines">
+        <div class="yaml-line"><span class="line-number">01</span><code class="line-content c"># Hi, I'm Kayemba, a security engineer who learns by taking things apart.</code></div>
+        <div class="yaml-line"><span class="line-number">02</span><code class="line-content c"># I work the whole offensive lifecycle: recon, vulnerability assessment,</code></div>
+        <div class="yaml-line"><span class="line-number">03</span><code class="line-content c"># exploitation against lab and sanctioned targets, then clear-language reporting.</code></div>
+        <div class="yaml-line"><span class="line-number">04</span><code class="line-content"> </code></div>
+        <div class="yaml-line"><span class="line-number">05</span><code class="line-content k">focus:</code></div>
+        <div class="yaml-line"><span class="line-number">06</span><code class="line-content l">  - web_application_penetration_testing</code></div>
+        <div class="yaml-line"><span class="line-number">07</span><code class="line-content l">  - api_security_testing</code></div>
+        <div class="yaml-line"><span class="line-number">08</span><code class="line-content l">  - red_team_methodology</code></div>
+        <div class="yaml-line"><span class="line-number">09</span><code class="line-content l">  - offensive_security_automation</code></div>
+        <div class="yaml-line"><span class="line-number">10</span><code class="line-content l">  - ai_and_llm_security</code></div>
+        <div class="yaml-line"><span class="line-number">11</span><code class="line-content"> </code></div>
+        <div class="yaml-line"><span class="line-number">12</span><code class="line-content k">background:</code></div>
+        <div class="yaml-line"><span class="line-number">13</span><code class="line-content v">  experience: 5+ years security &amp; technology</code></div>
+        <div class="yaml-line"><span class="line-number">14</span><code class="line-content v">  methodology: owasp_aligned</code></div>
+        <div class="yaml-line"><span class="line-number">15</span><code class="line-content v">  worked_across:</code></div>
+        <div class="yaml-line"><span class="line-number">16</span><code class="line-content l">    - south_korea</code></div>
+        <div class="yaml-line"><span class="line-number">17</span><code class="line-content l">    - vietnam</code></div>
+        <div class="yaml-line"><span class="line-number">18</span><code class="line-content l">    - singapore</code></div>
+        <div class="yaml-line"><span class="line-number">19</span><code class="line-content l">    - uae</code></div>
+        <div class="yaml-line"><span class="line-number">20</span><code class="line-content l">    - saudi_arabia</code></div>
+        <div class="yaml-line"><span class="line-number">21</span><code class="line-content l">    - japan</code></div>
+        <div class="yaml-line"><span class="line-number">22</span><code class="line-content l">    - canada</code></div>
+        <div class="yaml-line"><span class="line-number">23</span><code class="line-content"> </code></div>
+        <div class="yaml-line"><span class="line-number">24</span><code class="line-content k">home_lab:</code></div>
+        <div class="yaml-line"><span class="line-number">25</span><code class="line-content v">  stack: [linux, docker, active_directory, virtual_machines]</code></div>
+        <div class="yaml-line"><span class="line-number">26</span><code class="line-content v">  platforms: [portswigger, tryhackme, hack_the_box, apisec_university]</code></div>
+        <div class="yaml-line"><span class="line-number">27</span><code class="line-content"> </code></div>
+        <div class="yaml-line"><span class="line-number">28</span><code class="line-content k">currently_building:</code></div>
+        <div class="yaml-line"><span class="line-number">29</span><code class="line-content l">  - the_filter_ai</code></div>
+        <div class="yaml-line"><span class="line-number">30</span><code class="line-content l">  - ai_security_guardrails</code></div>
+        <div class="yaml-line"><span class="line-number">31</span><code class="line-content v">  - offensive_tooling_and_methodology: ongoing_updates</code></div>
       </div>
     </div>
-  </section>
+    <p class="file-hint">31 lines &middot; read only</p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="terminal-section" data-revealed="false">
+  <div class="prompt"><span>root@hamcodes</span>:<b>~/projects</b>$ ps aux</div>
+  <div>
+    <h2 class="sr-only">Projects</h2>
+    <div class="process-window">
+      <div class="process-list" id="processList" aria-label="Project list">
+        <div class="process-head"><span>PID</span><span>PROJECT</span><span>STATUS</span></div>
+        <button class="process-row" type="button"
+          data-pid="007" data-name="The Filter AI" data-cat="AI SECURITY" data-status="building" data-uptime="in development"
+          data-desc="A game where you play the guardrail. Catch prompt injections and jailbreaks before they reach the model."
+          data-contrib="Designed the attack corpus, built the scoring and detection logic, and shipped the browser game end to end."
+          data-stack="JavaScript &middot; LLM Guardrails &middot; Prompt Injection"
+          data-link="https://thefilter.hamcodes.com" data-link-label="thefilter.hamcodes.com">
+          <span>&#9656;007</span><span><b>The Filter AI</b><small>AI SECURITY</small></span><span class="status-building"><i></i>BUILDING</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="013" data-name="Hacker's Methodology" data-cat="OFFENSIVE SEC" data-status="ongoing" data-uptime="active"
+          data-desc="Free, structured methodology for learning offensive security, recon through reporting. Updated on an ongoing basis."
+          data-contrib="Authored the full methodology, lab walkthroughs, and the reporting templates that go with them."
+          data-stack="OWASP &middot; Recon &middot; Exploitation &middot; Reporting"
+          data-link="https://labs.hamcodes.com" data-link-label="labs.hamcodes.com">
+          <span> 013</span><span><b>Hacker's Methodology</b><small>OFFENSIVE SEC</small></span><span class="status-ongoing"><i></i>ONGOING</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="021" data-name="Hacker's Python" data-cat="SECURITY" data-status="ongoing" data-uptime="active"
+          data-desc="Learn Python by building real security tools. Real Python execution in the browser, 32 lessons, no install."
+          data-contrib="Wrote the 32-lesson curriculum and built the in-browser Python runtime so nothing needs installing."
+          data-stack="Python &middot; WebAssembly &middot; JavaScript"
+          data-link="https://hacker.hamcodes.com/hackers-python/" data-link-label="hacker.hamcodes.com">
+          <span> 021</span><span><b>Hacker's Python</b><small>SECURITY</small></span><span class="status-ongoing"><i></i>ONGOING</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="028" data-name="HackersNotes" data-cat="OFFENSIVE SEC" data-status="ongoing" data-uptime="active"
+          data-desc="Running notebook of offensive security techniques, tooling, and lab write-ups."
+          data-contrib="Maintain the notebook as an open reference, updated as techniques and tooling change."
+          data-stack="GitBook &middot; Notes &middot; Lab Write-ups"
+          data-link="https://hamcodes.gitbook.io/hackersnotes" data-link-label="hamcodes.gitbook.io">
+          <span> 028</span><span><b>HackersNotes</b><small>OFFENSIVE SEC</small></span><span class="status-ongoing"><i></i>ONGOING</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="034" data-name="Hamcodes" data-cat="PLATFORM" data-status="ongoing" data-uptime="active"
+          data-desc="Security &amp; STEAM education platform. Curricula, labs, and technical training resources."
+          data-contrib="Founded and run the platform: built the lab environments, wrote the curricula, and ship the site."
+          data-stack="PHP &middot; JavaScript &middot; MySQL &middot; Docker"
+          data-link="https://hamcodes.com" data-link-label="hamcodes.com">
+          <span> 034</span><span><b>Hamcodes</b><small>PLATFORM</small></span><span class="status-ongoing"><i></i>ONGOING</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="041" data-name="Digital Netizenship" data-cat="EDUCATION" data-status="ongoing" data-uptime="active"
+          data-desc="Choose-your-path game teaching kids to code and stay safe online. New scenarios still going in."
+          data-contrib="Built the branching game engine, wrote the scenarios, and ship new chapters as they are written."
+          data-stack="JavaScript &middot; HTML &middot; CSS"
+          data-link="https://netizen.hamcodes.com/" data-link-label="netizen.hamcodes.com">
+          <span> 041</span><span><b>Digital Netizenship</b><small>EDUCATION</small></span><span class="status-ongoing"><i></i>ONGOING</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="046" data-name="The Digital Citizen" data-cat="EDUCATION" data-status="complete" data-uptime="shipped"
+          data-desc="Build real web pages with HTML, CSS, and JavaScript. A beginner course for ages 11 and up, live preview included."
+          data-contrib="Wrote the course and built the live-preview editor students code in."
+          data-stack="HTML &middot; CSS &middot; JavaScript"
+          data-link="https://netizen.hamcodes.com/play/" data-link-label="netizen.hamcodes.com/play">
+          <span> 046</span><span><b>The Digital Citizen</b><small>EDUCATION</small></span><span class="status-complete"><i></i>COMPLETE</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="052" data-name="Hi Garten" data-cat="EDUCATION" data-status="ongoing" data-uptime="active"
+          data-desc="Preschool English learning with Mimo &amp; Zubi. Courses, worksheets, and printable libraries."
+          data-contrib="Designed the characters and course structure, and built the printable worksheet library."
+          data-stack="JavaScript &middot; HTML &middot; CSS"
+          data-link="https://higarten.hamcodes.com" data-link-label="higarten.hamcodes.com">
+          <span> 052</span><span><b>Hi Garten</b><small>EDUCATION</small></span><span class="status-ongoing"><i></i>ONGOING</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="058" data-name="Bro to Bro" data-cat="WRITING" data-status="complete" data-uptime="shipped"
+          data-desc="Life after school. The stuff I wish someone had explained before I had to figure it out the hard way."
+          data-contrib="Wrote and published the notes, online and in book form."
+          data-stack="Writing &middot; Web"
+          data-link="https://brotobro.hamcodes.com" data-link-label="brotobro.hamcodes.com">
+          <span> 058</span><span><b>Bro to Bro</b><small>WRITING</small></span><span class="status-complete"><i></i>COMPLETE</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="063" data-name="DIY Robotics" data-cat="ROBOTICS" data-status="complete" data-uptime="shipped"
+          data-desc="Build your own robot at home, project by project. 3D design, coding, and Arduino for beginners."
+          data-contrib="Wrote the projects and the accompanying book, Build A Bot."
+          data-stack="Arduino &middot; 3D Design &middot; GitBook"
+          data-link="https://hamcodes.gitbook.io/robotics-projects-build-your-own-robot-at-home" data-link-label="hamcodes.gitbook.io">
+          <span> 063</span><span><b>DIY Robotics</b><small>ROBOTICS</small></span><span class="status-complete"><i></i>COMPLETE</span>
+        </button>
+        <button class="process-row" type="button"
+          data-pid="069" data-name="Coding for Educators" data-cat="EDUCATION" data-status="complete" data-uptime="shipped"
+          data-desc="How to teach coding at home without knowing how to code. A practical guide for parents and teachers."
+          data-contrib="Wrote the guide and the accompanying book, Coding for Educators."
+          data-stack="Curriculum &middot; GitBook"
+          data-link="https://hamcodes.gitbook.io/how-to-teach-my-kid-coding-at-home-without-knowing-how-to-code" data-link-label="hamcodes.gitbook.io">
+          <span> 069</span><span><b>Coding for Educators</b><small>EDUCATION</small></span><span class="status-complete"><i></i>COMPLETE</span>
+        </button>
+
+        <div class="process-footer" id="processFooter">11 processes &middot; 6 ongoing<br>&uarr;&darr; select a row to inspect</div>
+      </div>
+
+      <div class="inspector">
+        <div class="inspector-head"><span>PROCESS INSPECTOR</span><span id="inspectorPid"></span></div>
+        <div class="inspector-body" id="inspectorBody"></div>
+      </div>
+    </div>
+
+    <div class="prompt" style="margin-top:56px"><span>root@hamcodes</span>:<b>~/projects</b>$ ls github.com/kayembahamid</div>
+    <div class="repo-list" id="repoList">
+      <p class="listing-info" id="repoStatus">fetching public repositories...</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="terminal-section" data-revealed="false">
+  <div class="prompt"><span>root@hamcodes</span>:<b>~/experience</b>$ cat career.log</div>
+  <div>
+    <h2 class="sr-only">Experience</h2>
+    <p class="listing-info">4 entries &middot; 5+ years &middot; newest first</p>
+    <div class="log-list">
+
+      <article class="log-entry">
+        <div class="log-head"><time>PRESENT</time><h3>Security &amp; Technology Educator / Independent Security Researcher</h3></div>
+        <p class="log-org">International &amp; Private Schools: South Korea &middot; Vietnam &middot; Singapore &middot; UAE &middot; Saudi Arabia &middot; Japan &middot; Canada Remote</p>
+        <ul>
+          <li>Conducted web application and API security testing using OWASP methodologies and structured security labs.</li>
+          <li>Built and maintained virtualized home lab environments (Linux, Docker, Active Directory, virtual machines) for security research and testing.</li>
+          <li>Developed and deployed web applications and backend systems using PHP, Python, JavaScript, and SQL.</li>
+          <li>Worked with GitHub deployments, cloud fundamentals, automation workflows, and containerized environments.</li>
+          <li>Researched vulnerability assessment methodologies, authentication systems, web application risk, and secure infrastructure practices.</li>
+        </ul>
+      </article>
+
+      <article class="log-entry">
+        <div class="log-head"><time>2023 &rarr; PRESENT</time><h3>Private Technology Mentorship</h3></div>
+        <p class="log-org">Tech Mentor</p>
+        <ul>
+          <li>AI / ML fundamentals &mdash; <a href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds" target="_blank" rel="noopener">Artificial Intelligence</a></li>
+          <li>Robotics &amp; engineering &mdash; <a href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds" target="_blank" rel="noopener">Robotics</a></li>
+          <li>Coding &amp; game development &mdash; <a href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds" target="_blank" rel="noopener">Coding</a></li>
+          <li>Cyber safety &amp; digital citizenship &mdash; <a href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds" target="_blank" rel="noopener">Cyber Safety</a></li>
+          <li>Projects &amp; a digital portfolio &mdash; <a href="https://hamcodes.com/pages/technology-mentorship-for-curious-young-minds" target="_blank" rel="noopener">Portfolio Footprint</a></li>
+        </ul>
+      </article>
+
+      <article class="log-entry">
+        <div class="log-head"><time>2020 &rarr; PRESENT</time><h3>Author &amp; Content Creator</h3></div>
+        <p class="log-org">Published on Amazon</p>
+        <ul>
+          <li>The Hacker's Notes: How to Hack All-Tech. No Fluff. No Theory. Just Execution. &mdash; <a href="https://www.amazon.com/Hackers-Notes-All-Tech-Theory-Execution/dp/B0F5ZGFK1B/" target="_blank" rel="noopener">The Hacker's Notes</a></li>
+          <li>Build A Bot: Robotics STEAM Projects for Beginners with 3D Design, Coding, and Arduino. &mdash; <a href="https://www.amazon.com/Build-Bot-Robotics-Projects-Beginners/dp/B0FMPCPZYP/" target="_blank" rel="noopener">DIY Robotics</a></li>
+          <li>Coding for Educators: A Practical Guide for Teaching Code to Students. &mdash; <a href="https://www.amazon.com/Coding-Educators-First-Code-Teachers/dp/B0F7GWSRJK/" target="_blank" rel="noopener">Coding for Educators</a></li>
+          <li>Coding for Teens, My First Code: From Scratch to Bots with Code.org. &mdash; <a href="https://www.amazon.com/gp/product/B0DGLP5JFM/" target="_blank" rel="noopener">Coding for Teens</a></li>
+          <li>Coding for Kids, My First Code: From Scratch to Bots with Code.org. &mdash; <a href="https://www.amazon.com/Coding-kids-My-First-Code-ebook/dp/B0DFX4L8B5/" target="_blank" rel="noopener">Coding for Kids</a></li>
+        </ul>
+      </article>
+
+      <article class="log-entry">
+        <div class="log-head"><time>2017 &rarr; PRESENT</time><h3>Founder &amp; Technical Educator, Hamcodes</h3></div>
+        <p class="log-org">hamcodes.com</p>
+        <ul>
+          <li>Designed and delivered cybersecurity, coding, and AI literacy training programs and hands-on labs.</li>
+          <li>Built practical laboratory environments using Linux, Docker, Active Directory, APIs, and virtual machines.</li>
+          <li>Authored technical publications and cybersecurity learning resources, including the free <a href="https://labs.hamcodes.com" target="_blank" rel="noopener">Hacker's Methodology</a> and <a href="https://hamcodes.gitbook.io/hackersnotes" target="_blank" rel="noopener">HackersNotes</a>.</li>
+          <li>Developed learning pathways for cybersecurity, programming, networking, and cloud technologies.</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="terminal-section" data-revealed="false">
+  <div class="prompt"><span>root@hamcodes</span>:<b>~/skills</b>$ apt list --installed</div>
+  <div>
+    <h2 class="sr-only">Skills</h2>
+    <p class="listing-info">Listing... 28 packages &middot; 5 repositories</p>
+    <div class="table-wrap">
+    <table class="skill-table">
+      <thead><tr><th scope="col">Package</th><th scope="col">Repository</th><th scope="col">Status</th></tr></thead>
+      <tbody>
+        <tr><td>web-app-pentesting</td><td>offensive-security</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>api-security-testing</td><td>offensive-security</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>owasp-top-10</td><td>offensive-security</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>auth-and-authz-testing</td><td>offensive-security</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>vulnerability-assessment</td><td>offensive-security</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>security-reporting</td><td>offensive-security</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>burp-suite</td><td>offensive-security</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>red-team-methodology</td><td>offensive-security</td><td><em class="learning">learning</em></td></tr>
+        <tr><td>linux</td><td>infrastructure</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>docker</td><td>infrastructure</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>active-directory</td><td>infrastructure</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>networking</td><td>infrastructure</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>aws</td><td>infrastructure</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>azure</td><td>infrastructure</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>google-cloud</td><td>infrastructure</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>oracle-cloud</td><td>infrastructure</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>python</td><td>development</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>bash</td><td>development</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>javascript</td><td>development</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>sql</td><td>development</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>php</td><td>development</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>node-js</td><td>development</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>rest-apis</td><td>development</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>ci-cd</td><td>development</td><td><em class="learning">learning</em></td></tr>
+        <tr><td>ai-security</td><td>ai</td><td><em class="learning">learning</em></td></tr>
+        <tr><td>llm-guardrails</td><td>ai</td><td><em class="learning">learning</em></td></tr>
+        <tr><td>technical-documentation</td><td>professional</td><td><em class="installed">installed</em></td></tr>
+        <tr><td>security-awareness-training</td><td>professional</td><td><em class="installed">installed</em></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="file-hint">0 upgraded, 0 newly installed, &infin; to explore.</p>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs" class="terminal-section" data-revealed="false">
+  <div class="prompt"><span>root@hamcodes</span>:<b>~/certs</b>$ ls -lah</div>
+  <div>
+    <h2 class="sr-only">Certifications &amp; training</h2>
+    <p class="listing-info">total 10 &middot; certifications and structured training</p>
+    <div class="directories">
+      <span><small>drwxr-xr-x</small>offensive-security/</span>
+      <span><small>drwxr-xr-x</small>cloud/</span>
+      <span><small>drwxr-xr-x</small>development/</span>
+      <span><small>drwxr-xr-x</small>labs/</span>
+    </div>
+    <div class="cert-list">
+      <div><u>-rw-r--r--</u><em>TCM Security</em><span>Practical Ethical Hacking</span></div>
+      <div><u>-rw-r--r--</u><em>APIsec University</em><span>API Security</span></div>
+      <div><u>-rw-r--r--</u><em>TryHackMe</em><span>Learning Paths</span></div>
+      <div><u>-rw-r--r--</u><em>Hack The Box</em><span>Labs</span></div>
+      <div><u>-rw-r--r--</u><em>AWS</em><span>Cloud Fundamentals</span></div>
+      <div><u>-rw-r--r--</u><em>Microsoft Azure</em><span>Fundamentals</span></div>
+      <div><u>-rw-r--r--</u><em>Google Cloud</em><span>Fundamentals</span></div>
+      <div><u>-rw-r--r--</u><em>Oracle Cloud</em><span>Fundamentals</span></div>
+      <div><u>-rw-r--r--</u><em>The Odin Project</em><span>Full Stack Web Development</span></div>
+      <div><u>-rw-r--r--</u><em>CODE AI</em><span>Verified Computer Science Educator</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section id="writing" class="terminal-section" data-revealed="false">
+  <div class="prompt"><span>root@hamcodes</span>:<b>~/writing</b>$ ls -lah</div>
+  <div>
+    <h2 class="sr-only">Writing</h2>
+    <p class="listing-info">total 4 tags, 6 published works</p>
+    <div class="directories">
+      <span><small>drwxr-xr-x</small>security/</span>
+      <span><small>drwxr-xr-x</small>robotics/</span>
+      <span><small>drwxr-xr-x</small>education/</span>
+      <span><small>drwxr-xr-x</small>newsletter/</span>
+    </div>
+    <div class="post-list">
+      <a href="https://www.amazon.com/Hackers-Notes-All-Tech-Theory-Execution/dp/B0F5ZGFK1B/" target="_blank" rel="noopener">
+        <b>&gt;</b><span><strong>the-hackers-notes.book</strong><small>How to hack all-tech. No fluff. No theory. Just execution.</small></span><em>security / offensive</em><i>Amazon &nearr;</i>
+      </a>
+      <a href="https://hamcodes.gitbook.io/hackersnotes" target="_blank" rel="noopener">
+        <b>&gt;</b><span><strong>hackersnotes.gitbook</strong><small>Running notebook of offensive security techniques, tooling, and lab write-ups.</small></span><em>security / notes</em><i>GitBook &nearr;</i>
+      </a>
+      <a href="https://cyberhamcodes.substack.com/" target="_blank" rel="noopener">
+        <b>&gt;</b><span><strong>cyberhamcodes.substack</strong><small>Notes on security, AI, and building things that hold up.</small></span><em>newsletter</em><i>Substack &nearr;</i>
+      </a>
+      <a href="https://www.amazon.com/Build-Bot-Robotics-Projects-Beginners/dp/B0FMPCPZYP/" target="_blank" rel="noopener">
+        <b>&gt;</b><span><strong>build-a-bot.book</strong><small>Robotics STEAM projects for beginners with 3D design, coding, and Arduino.</small></span><em>robotics / steam</em><i>Amazon &nearr;</i>
+      </a>
+      <a href="https://www.amazon.com/Coding-Educators-First-Code-Teachers/dp/B0F7GWSRJK/" target="_blank" rel="noopener">
+        <b>&gt;</b><span><strong>coding-for-educators.book</strong><small>A practical guide for teaching code to students.</small></span><em>education</em><i>Amazon &nearr;</i>
+      </a>
+      <a href="https://hamcodes.gitbook.io/robotics-projects-build-your-own-robot-at-home" target="_blank" rel="noopener">
+        <b>&gt;</b><span><strong>diy-robotics.gitbook</strong><small>Build your own robot at home, project by project.</small></span><em>robotics</em><i>GitBook &nearr;</i>
+      </a>
+    </div>
+    <a class="text-link" href="https://cyberhamcodes.substack.com/" target="_blank" rel="noopener">[ READ THE NEWSLETTER &rarr; ]</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="terminal-section" data-revealed="false" data-scanned="false">
+  <div class="prompt"><span>root@hamcodes</span>:<b>~</b>$ nmap -sV kayembahamid.github.io</div>
+  <div>
+    <h2 class="sr-only">Contact</h2>
+    <div class="nmap-output">
+      <p data-nmap-row="true">Starting Nmap 7.95</p>
+      <br data-nmap-row="true">
+      <p data-nmap-row="true">Nmap scan report for kayembahamid.github.io</p>
+      <p data-nmap-row="true">Host is <b>up</b> (0.018s latency).</p>
+      <br data-nmap-row="true">
+      <div class="port-header" data-nmap-row="true"><span>PORT</span><span>STATE</span><span>SERVICE</span><span>VERSION</span></div>
+      <a data-nmap-row="true" href="mailto:ham@hamcodes.com"><span>25/tcp</span><b>open</b><span>email</span><u>ham@hamcodes.com</u></a>
+      <a data-nmap-row="true" href="https://github.com/kayembahamid" target="_blank" rel="noopener"><span>22/tcp</span><b>open</b><span>git</span><u>github.com/kayembahamid</u></a>
+      <a data-nmap-row="true" href="https://www.linkedin.com/in/cyberhamcodes/" target="_blank" rel="noopener"><span>443/tcp</span><b>open</b><span>linkedin</span><u>linkedin.com/in/cyberhamcodes</u></a>
+      <a data-nmap-row="true" href="https://hamcodes.com" target="_blank" rel="noopener"><span>80/tcp</span><b>open</b><span>http</span><u>hamcodes.com</u></a>
+      <a data-nmap-row="true" href="https://cyberhamcodes.substack.com/" target="_blank" rel="noopener"><span>587/tcp</span><b>open</b><span>substack</span><u>cyberhamcodes.substack.com</u></a>
+      <a data-nmap-row="true" href="https://x.com/Hamcodehacks" target="_blank" rel="noopener"><span>993/tcp</span><b>open</b><span>x</span><u>x.com/Hamcodehacks</u></a>
+      <a data-nmap-row="true" href="https://www.youtube.com/@hamcodes" target="_blank" rel="noopener"><span>1935/tcp</span><b>open</b><span>youtube</span><u>@hamcodes</u></a>
+      <a data-nmap-row="true" href="https://www.tiktok.com/@hamcodes" target="_blank" rel="noopener"><span>3000/tcp</span><b>open</b><span>tiktok</span><u>@hamcodes</u></a>
+      <a data-nmap-row="true" href="https://www.facebook.com/profile.php?id=61555697920170" target="_blank" rel="noopener"><span>5222/tcp</span><b>open</b><span>facebook</span><u>hamcodes hacks</u></a>
+      <a data-nmap-row="true" href="assets/Kayemba_Hamiidu_Security_Engineer_Resume.pdf" target="_blank" rel="noopener"><span>8080/tcp</span><b>open</b><span>resume</span><u>my resume</u></a>
+      <br data-nmap-row="true">
+      <p data-nmap-row="true">Service detection performed.</p>
+      <p data-nmap-row="true">Nmap done: 1 IP address (1 host up) scanned in 0.38 seconds</p>
+    </div>
+    <p class="contact-note"># open to Security Engineer, Red Team, and Penetration Testing roles<br># reach out directly, no forms, no gatekeeping</p>
+    <footer class="site-footer">
+      <span>root@hamcodes:<b>~</b>$ <i class="cursor"></i></span>
+      <span>&copy; <span id="year"></span> Kayemba Hamiidu &middot; hamcodes.com &middot; built by hand</span>
+    </footer>
+  </div>
+</section>
+
 </main>
-
-<footer class="footer">
-  <p class="mono muted small">© <span id="year"></span> hamcodes (K.H)</p>
-  <p class="mono muted small"> <span id="year"></span> www.hamcodes.com</p>
-</footer>
 
 <script src="assets/js/app.js"></script>
 </body>
