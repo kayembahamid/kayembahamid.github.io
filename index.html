@@ -28,7 +28,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script>document.documentElement.className+=" js";</script>
-<link rel="stylesheet" href="assets/css/style.css">
+<!-- Keep the portrait bounded even if a visitor has an older stylesheet cached. -->
+<style>
+.hero-portrait{width:min(100%,360px);margin:0}
+.portrait-control{position:relative;display:block;width:100%;aspect-ratio:1;padding:0;border:0;background:transparent}
+.portrait-control img{display:block;width:100%;height:auto}
+.portrait-control canvas{position:absolute;inset:0;width:100%;height:100%;visibility:hidden;pointer-events:none}
+</style>
+<link rel="stylesheet" href="assets/css/style.css?v=952023b0e45c">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Kayemba Hamiidu","url":"https://kayembahamid.github.io","email":"mailto:ham@hamcodes.com","jobTitle":"Security Engineer","knowsAbout":["Penetration testing","API security","Red team methodology","Offensive security automation","AI security"],"sameAs":["https://github.com/kayembahamid","https://www.linkedin.com/in/cyberhamcodes/","https://hamcodes.com","https://cyberhamcodes.substack.com/"]}
 </script>
@@ -111,8 +118,8 @@
 
   <figure class="hero-portrait" id="heroPortrait">
     <button class="portrait-control" id="portraitControl" type="button" disabled aria-label="Interactive portrait of Kayemba. Drag to stretch, or use the arrow keys. Press Escape to reset." aria-describedby="portraitHint portraitKeyboardHint">
-      <img id="portraitImage" src="assets/images/kayemba-portrait.webp" width="900" height="900" alt="Kayemba smiling, wearing clear glasses and a black sweater." fetchpriority="high" draggable="false">
-      <canvas id="portraitCanvas" width="900" height="900" aria-hidden="true"></canvas>
+      <img id="portraitImage" src="assets/images/kayemba-portrait.webp" width="360" height="360" alt="Kayemba smiling, wearing clear glasses and a black sweater." fetchpriority="high" draggable="false">
+      <canvas id="portraitCanvas" width="360" height="360" aria-hidden="true"></canvas>
     </button>
     <figcaption id="portraitHint">A face behind the terminal.</figcaption>
     <span class="sr-only" id="portraitKeyboardHint">Press Enter or Space for a playful tug. Use the arrow keys to stretch the portrait, and Escape to reset.</span>
@@ -536,10 +543,10 @@
 
 </main>
 
-<script src="assets/js/track.js" defer></script>
-<script src="assets/js/visitors.js" defer></script>
-<script src="assets/js/hc-actions.js" defer></script>
-<script src="assets/js/app.js"></script>
-<script src="assets/js/avatar.js" defer></script>
+<script src="assets/js/track.js?v=c7d4aa8740c9" defer></script>
+<script src="assets/js/visitors.js?v=8606910ad88c" defer></script>
+<script src="assets/js/hc-actions.js?v=2687c53fdc64" defer></script>
+<script src="assets/js/app.js?v=ecdc457afbad"></script>
+<script src="assets/js/avatar.js?v=8b1b9146183c" defer></script>
 </body>
 </html>

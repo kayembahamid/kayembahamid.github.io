@@ -14,6 +14,9 @@
   var ready = false;
   var visible = true;
   var pointer = null;
+  var pointerStart = { x: 0, y: 0 };
+  var dragged = false;
+  var suppressClick = false;
   var frame = 0;
   var releaseTimer = 0;
   var previousTime = 0;
@@ -21,6 +24,7 @@
   var pull = { x: 0, y: 0 };
   var target = { x: 0, y: 0 };
   var velocity = { x: 0, y: 0 };
+  var idleHint = 'Tap or drag to stretch.';
 
   function active() {
     return ready && !motion.matches && visible && !document.hidden;
@@ -33,11 +37,14 @@
     previousTime = 0;
     var capturedPointer = pointer;
     pointer = null;
+    dragged = false;
+    if (capturedPointer !== null) suppressClick = true;
     if (capturedPointer !== null && control.hasPointerCapture(capturedPointer)) {
       control.releasePointerCapture(capturedPointer);
     }
     figure.classList.remove('is-dragging');
     pull.x = pull.y = target.x = target.y = velocity.x = velocity.y = 0;
+    if (ready && !motion.matches) hint.textContent = idleHint;
   }
 
   function fallback() {
@@ -102,6 +109,7 @@
       pull.x = target.x;
       pull.y = target.y;
       velocity.x = velocity.y = 0;
+      if (pointer === null && !target.x && !target.y) hint.textContent = idleHint;
     }
     draw();
     if (moving) frame = window.requestAnimationFrame(animate);
@@ -129,13 +137,15 @@
 
   function limit(value) { return Math.max(-0.14, Math.min(0.14, value)); }
 
-  function tug(x, y) {
+  function tug(x, y, point) {
     if (!active() || pointer !== null) return;
     window.clearTimeout(releaseTimer);
-    grab.x = 0.5;
-    grab.y = 0.45;
+    // Keep a tap near the edge close enough to the face to make the tug visible.
+    grab.x = point ? Math.max(0.25, Math.min(0.75, point.x)) : 0.5;
+    grab.y = point ? Math.max(0.2, Math.min(0.75, point.y)) : 0.45;
     target.x = x;
     target.y = y;
+    hint.textContent = 'Hello from behind the terminal.';
     wake();
     releaseTimer = window.setTimeout(release, 160);
   }
@@ -151,7 +161,7 @@
     control.disabled = false;
     draw();
     figure.classList.add('is-interactive', 'is-ready');
-    hint.textContent = 'Go on, drag to stretch.';
+    hint.textContent = idleHint;
   }
 
   function initialize() {
@@ -210,12 +220,21 @@
     var point = position(event);
     grab.x = point.x;
     grab.y = point.y;
+    pointerStart.x = event.clientX;
+    pointerStart.y = event.clientY;
+    dragged = false;
+    suppressClick = false;
     pointer = event.pointerId;
     control.setPointerCapture(pointer);
-    figure.classList.add('is-dragging');
   });
   control.addEventListener('pointermove', function (event) {
     if (event.pointerId !== pointer) return;
+    var distanceX = event.clientX - pointerStart.x;
+    var distanceY = event.clientY - pointerStart.y;
+    if (!dragged && distanceX * distanceX + distanceY * distanceY < 36) return;
+    dragged = true;
+    figure.classList.add('is-dragging');
+    hint.textContent = 'Pull, then let go.';
     var point = position(event);
     target.x = limit(point.x - grab.x);
     target.y = limit(point.y - grab.y);
@@ -223,12 +242,22 @@
   });
   ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (name) {
     control.addEventListener(name, function (event) {
-      if (event.pointerId === pointer) release();
+      if (event.pointerId !== pointer) return;
+      // Browsers dispatch a click after a drag; a canceled scroll must not tug either.
+      suppressClick = dragged || name !== 'pointerup';
+      release();
     });
   });
-  // Native button activation supplies Enter/Space and assistive-technology clicks.
+  // Native activation also supplies Enter/Space and assistive-technology clicks.
   control.addEventListener('click', function (event) {
-    if (event.detail === 0) tug(0.065, -0.04);
+    if (event.detail === 0) {
+      suppressClick = false;
+      tug(0.065, -0.04);
+    } else if (suppressClick) {
+      suppressClick = false;
+    } else {
+      tug(0.065, -0.04, position(event));
+    }
   });
   control.addEventListener('keydown', function (event) {
     var directions = { ArrowLeft: [-0.08, 0], ArrowRight: [0.08, 0], ArrowUp: [0, -0.08], ArrowDown: [0, 0.08] };
@@ -251,7 +280,9 @@
   });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
-      visible = entries[0].isIntersecting;
+      var nextVisible = entries[0].isIntersecting;
+      if (visible === nextVisible) return;
+      visible = nextVisible;
       reset();
       if (active()) draw();
     }).observe(figure);

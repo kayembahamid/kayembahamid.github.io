@@ -516,10 +516,10 @@ ul{margin:0;padding:0;list-style:none}
     display:grid;width:min(224px,calc(100vw - 36px));padding:6px;
     border:1px solid var(--line);border-radius:4px;background:var(--surface);
     box-shadow:0 14px 32px rgba(0,0,0,.32);
-    opacity:0;pointer-events:none;transform:translateY(-6px);
+    visibility:hidden;opacity:0;pointer-events:none;transform:translateY(-6px);
     transition:opacity .24s ease,transform .24s ease;
   }
-  .site-nav.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+  .site-nav.open{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0)}
   .site-nav a{padding:10px 11px}
   .identity{font-size:12px}
 

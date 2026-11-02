@@ -34,3 +34,10 @@ python3 -m http.server 8080
 
 Edit `index.html` directly — profile, skills, experience, certifications, and projects
 are plain markup, no data files or build step involved.
+
+After changing CSS or JavaScript, run `node scripts/version-assets.cjs` before
+publishing. This updates the asset URLs so returning visitors receive matching
+HTML, styles, and scripts instead of an older cached version.
+
+Check the portrait interaction with `node --test scripts/test-avatar.cjs` and
+asset versions with `node scripts/version-assets.cjs --check`.
