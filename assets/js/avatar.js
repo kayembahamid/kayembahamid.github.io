@@ -14,7 +14,7 @@
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var gl, program, buffer, texture;
   var textures = [], uniforms = {};
-  var ready = false, visible = true, focused = true, hovered = false;
+  var ready = false, visible = true, hovered = false;
   var loadedFaces = {}, optionalStarted = false, generation = 0;
   var pointer = null, pointerStart = { x: 0, y: 0 }, dragged = false, suppressClick = false;
   var frame = 0, releaseTimer = 0, idleTimer = 0, previousTime = 0;
@@ -36,7 +36,7 @@
   function spring() { return { x: 0, y: 0, tx: 0, ty: 0, vx: 0, vy: 0 }; }
   function scalar() { return { value: 0, target: 0, velocity: 0 }; }
   function clamp(value, low, high) { return Math.max(low, Math.min(high, value)); }
-  function active() { return ready && !motion.matches && visible && focused && !document.hidden; }
+  function active() { return ready && !motion.matches && visible && !document.hidden; }
   function say(text) { if (hint.textContent !== text) hint.textContent = text; }
   function state(value) { if (figure.getAttribute('data-portrait-state') !== value) figure.setAttribute('data-portrait-state', value); }
 
@@ -508,9 +508,19 @@
     if (event.relatedTarget !== null || !active() || pointer !== null) return;
     cursor.x = cursor.y = look.tx = look.ty = 0; wake();
   });
-  window.addEventListener('blur', function () { focused = false; reset(); });
+  // Losing keyboard focus does not mean the portrait has left the screen.
+  // Release an interrupted grab, but keep entertaining a visitor reading beside it.
+  window.addEventListener('blur', function () {
+    reset();
+    if (active()) { loadExpressions(); draw(); scheduleIdle(250); }
+  });
   window.addEventListener('portfolio:ready', function () { bootComplete = true; if (active()) scheduleIdle(120); });
-  window.addEventListener('focus', function () { focused = true; if (active()) { loadExpressions(); draw(); scheduleIdle(250); } });
+  window.addEventListener('focus', function () {
+    if (!active()) return;
+    loadExpressions();
+    draw();
+    if (!routine && !idleTimer && pointer === null) scheduleIdle(250);
+  });
   canvas.addEventListener('webglcontextlost', function (event) { event.preventDefault(); fallback(); });
   canvas.addEventListener('webglcontextrestored', initialize);
   image.addEventListener('error', fallback);

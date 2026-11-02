@@ -263,20 +263,42 @@ test('grabbing immediately takes control from an automatic scratch or demonstrat
   assert.ok(p.draws.at(-1).pull[0] > 0.25); assert.deepEqual(p.draws.at(-1).demo, [0, 0]);
 });
 
-test('automatic work stops completely when inactive and resumes promptly when visible', () => {
-  for (const mode of ['offscreen', 'hidden', 'blur']) {
+test('automatic work stops completely offscreen or hidden and resumes promptly when visible', () => {
+  for (const mode of ['offscreen', 'hidden']) {
     const p = portrait(); p.advance(4500);
     if (mode === 'offscreen') p.intersection(false);
     if (mode === 'hidden') p.visibility(true);
-    if (mode === 'blur') p.windowEvent('blur');
     assert.equal(p.pending, 0, mode);
     const count = p.draws.length; p.advance(30000); assert.equal(p.draws.length, count);
     if (mode === 'offscreen') p.intersection(true);
     if (mode === 'hidden') p.visibility(false);
-    if (mode === 'blur') p.windowEvent('focus');
     p.advance(400);
     assert.ok(p.draws.some(draw => draw.time >= 34500 && draw.state !== 'idle'), mode + ' resumes an act within400ms');
   }
+});
+
+test('a visible unfocused portrait releases a grab and continues autoplay', () => {
+  const p = portrait(); p.pointer('pointerdown'); p.pointer('pointermove', { clientX: 280 }); p.advance(300);
+  assert.equal(p.captured.size, 1);
+  p.windowEvent('blur');
+  assert.equal(p.captured.size, 0);
+  assert.deepEqual(p.draws.at(-1).pull, [0, 0]);
+  assert.equal(p.pendingTimers, 1, 'visible blur schedules an automatic act');
+  p.advance(400);
+  assert.ok(p.draws.some(draw => draw.time > 300 && draw.state === 'raising-brows'));
+  p.advance(25000);
+  assert.ok(p.draws.some(draw => draw.state === 'yawning'));
+  assert.ok(p.draws.some(draw => draw.state === 'laughing'));
+});
+
+test('returning keyboard focus does not restart an already visible act', () => {
+  const p = portrait(); p.advance(700);
+  const before = p.draws.at(-1).brows;
+  assert.ok(before > 0.5);
+  p.windowEvent('focus');
+  assert.equal(p.draws.at(-1).brows, before);
+  p.advance(2500);
+  assert.equal(p.draws.at(-1).state, 'scratching');
 });
 
 test('reduced motion and blocked WebGL retain only the still portrait', () => {
