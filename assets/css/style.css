@@ -246,12 +246,23 @@ ul{margin:0;padding:0;list-style:none}
 .hero-portrait.is-interactive .portrait-control{cursor:grab;touch-action:pan-y}
 .hero-portrait.is-dragging .portrait-control{cursor:grabbing}
 .portrait-control:focus-visible{outline:1px dashed var(--green);outline-offset:5px}
+.portrait-ghost{
+  position:absolute;z-index:2;display:block;left:var(--ghost-x,82%);top:var(--ghost-y,46%);
+  width:27px;height:32px;overflow:visible;opacity:0;visibility:hidden;
+  transform:translate(-20%,-20%) rotate(var(--ghost-angle,-12deg));
+  pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6));
+}
+.portrait-ghost path{fill:var(--green);stroke:var(--bg);stroke-width:1.5;stroke-linejoin:round}
+.portrait-ghost circle{fill:none;stroke:var(--green);stroke-width:1.5;opacity:0}
+.hero-portrait.is-demonstrating .portrait-ghost{opacity:1;visibility:visible}
+.hero-portrait.is-demonstrating .portrait-ghost circle{opacity:.4}
 .hero-portrait figcaption{
   min-height:1.5em;margin-top:12px;text-align:center;
   color:var(--muted);font-size:11px;line-height:1.5;letter-spacing:.04em;
 }
 .hero-portrait.is-interactive figcaption::before{content:"> ";color:var(--green)}
 .hero-portrait.is-dragging figcaption{color:var(--green)}
+.hero-portrait.is-demonstrating figcaption{color:var(--green)}
 
 .current{display:grid;gap:8px;margin-top:54px}
 .current>span{color:var(--slate);font-size:11.5px;letter-spacing:.18em}
@@ -566,4 +577,5 @@ ul{margin:0;padding:0;list-style:none}
     transition-duration:.01ms!important;scroll-behavior:auto!important;
   }
   .scanlines,.vignette,.cursor{display:none}
+  .portrait-ghost{display:none}
 }

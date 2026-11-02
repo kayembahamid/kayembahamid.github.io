@@ -34,8 +34,9 @@
 .portrait-control{position:relative;display:block;width:100%;aspect-ratio:1;padding:0;border:0;background:transparent}
 .portrait-control img{display:block;width:100%;height:auto}
 .portrait-control canvas{position:absolute;inset:0;width:100%;height:100%;visibility:hidden;pointer-events:none}
+.portrait-ghost{display:none}
 </style>
-<link rel="stylesheet" href="assets/css/style.css?v=952023b0e45c">
+<link rel="stylesheet" href="assets/css/style.css?v=38d1920e9b01">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Kayemba Hamiidu","url":"https://kayembahamid.github.io","email":"mailto:ham@hamcodes.com","jobTitle":"Security Engineer","knowsAbout":["Penetration testing","API security","Red team methodology","Offensive security automation","AI security"],"sameAs":["https://github.com/kayembahamid","https://www.linkedin.com/in/cyberhamcodes/","https://hamcodes.com","https://cyberhamcodes.substack.com/"]}
 </script>
@@ -116,13 +117,17 @@
     </dl>
   </div>
 
-  <figure class="hero-portrait" id="heroPortrait">
-    <button class="portrait-control" id="portraitControl" type="button" disabled aria-label="Interactive portrait of Kayemba. Drag to stretch, or use the arrow keys. Press Escape to reset." aria-describedby="portraitHint portraitKeyboardHint">
-      <img id="portraitImage" src="assets/images/kayemba-portrait.webp" width="360" height="360" alt="Kayemba smiling, wearing clear glasses and a black sweater." fetchpriority="high" draggable="false">
+  <figure class="hero-portrait" id="heroPortrait" data-blink-src="assets/images/kayemba-blink.webp?v=a9770502309d" data-reaction-src="assets/images/kayemba-surprised.webp?v=34f610c9677a">
+    <button class="portrait-control" id="portraitControl" type="button" disabled aria-label="Interactive portrait of Kayemba. Move your mouse, tap or drag to stretch, or use the arrow keys. Press Escape to reset." aria-describedby="portraitHint portraitKeyboardHint">
+      <img id="portraitImage" src="assets/images/kayemba-portrait.webp?v=cb9866245ed6" width="360" height="360" alt="Kayemba smiling, wearing clear glasses and a black sweater." fetchpriority="high" draggable="false">
       <canvas id="portraitCanvas" width="360" height="360" aria-hidden="true"></canvas>
+      <svg id="portraitGhost" class="portrait-ghost" width="27" height="32" viewBox="0 0 32 38" aria-hidden="true" focusable="false">
+        <path d="M4 3v25l7-7 6 13 5-3-6-12h10Z"/>
+        <circle cx="8" cy="11" r="8"/>
+      </svg>
     </button>
     <figcaption id="portraitHint">A face behind the terminal.</figcaption>
-    <span class="sr-only" id="portraitKeyboardHint">Press Enter or Space for a playful tug. Use the arrow keys to stretch the portrait, and Escape to reset.</span>
+    <span class="sr-only" id="portraitKeyboardHint">The portrait follows your mouse and sometimes moves by itself. Press Enter or Space for a playful tug. Use the arrow keys to stretch the portrait, and Escape to reset. Your reduced-motion preference disables animation.</span>
   </figure>
   </div>
 
@@ -547,6 +552,6 @@
 <script src="assets/js/visitors.js?v=8606910ad88c" defer></script>
 <script src="assets/js/hc-actions.js?v=2687c53fdc64" defer></script>
 <script src="assets/js/app.js?v=ecdc457afbad"></script>
-<script src="assets/js/avatar.js?v=8b1b9146183c" defer></script>
+<script src="assets/js/avatar.js?v=eac62ccc9b60" defer></script>
 </body>
 </html>
