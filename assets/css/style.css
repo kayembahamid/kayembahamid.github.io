@@ -254,8 +254,10 @@ ul{margin:0;padding:0;list-style:none}
 }
 .portrait-ghost path{fill:var(--green);stroke:var(--bg);stroke-width:1.5;stroke-linejoin:round}
 .portrait-ghost circle{fill:none;stroke:var(--green);stroke-width:1.5;opacity:0}
+.portrait-ghost .scratch-strokes{fill:none;stroke:var(--green);stroke-width:1.5;stroke-linecap:round;opacity:0}
 .hero-portrait.is-demonstrating .portrait-ghost{opacity:1;visibility:visible}
 .hero-portrait.is-demonstrating .portrait-ghost circle{opacity:.4}
+.hero-portrait[data-portrait-state="scratching"] .scratch-strokes{opacity:.8}
 .hero-portrait figcaption{
   min-height:1.5em;margin-top:12px;text-align:center;
   color:var(--muted);font-size:11px;line-height:1.5;letter-spacing:.04em;

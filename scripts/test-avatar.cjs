@@ -36,7 +36,11 @@ function portrait(options = {}) {
   if (!options.noExpressions) {
     nodes.heroPortrait.setAttribute('data-blink-src', 'blink.webp');
     nodes.heroPortrait.setAttribute('data-reaction-src', 'surprise.webp');
+    nodes.heroPortrait.setAttribute('data-yawn-src', 'yawn.webp');
+    nodes.heroPortrait.setAttribute('data-brows-src', 'brows.webp');
+    nodes.heroPortrait.setAttribute('data-laugh-src', 'laugh.webp');
   }
+  if (options.booting) nodes.bootScreen = { hidden: false };
   const gl = new Proxy({}, {
     get(_, key) {
       if (key === 'NO_ERROR') return 0;
@@ -57,7 +61,7 @@ function portrait(options = {}) {
       if (key === 'createTexture') return () => ({ id: ++textureId });
       if (key === 'drawArrays') return () => draws.push({
         pull: [...uniforms.uPull], look: [...uniforms.uLook], demo: [...uniforms.uDemo], grab: [...uniforms.uGrab],
-        blink: uniforms.uBlink, surprise: uniforms.uSurprise, tilt: uniforms.uTilt,
+        blink: uniforms.uBlink, surprise: uniforms.uSurprise, yawn: uniforms.uYawn, brows: uniforms.uBrows, laugh: uniforms.uLaugh, tilt: uniforms.uTilt,
         state: nodes.heroPortrait.getAttribute('data-portrait-state'), time: now
       });
       if (['createShader', 'createProgram', 'createBuffer'].includes(key)) return () => ({});
@@ -111,9 +115,9 @@ function portrait(options = {}) {
     advance(milliseconds) { const end = now + milliseconds; while (now < end) step(); },
     settle() {
       let count = 0;
-      // Future attention timers are intentional; user gestures must stop RAF first.
-      while (frames.size || [...timers.values()].some(item => item.at - now <= 500)) {
-        assert.ok(count++ < 600, 'animation must settle without permanent rendering'); step();
+      // Used after visitor gestures; future automatic acts do not delay this check.
+      while (frames.size || count < 18) {
+        assert.ok(count++ < 240, 'visitor gesture must settle before automatic acts resume'); step();
       }
     },
     pointer(type, values = {}) {
@@ -125,6 +129,7 @@ function portrait(options = {}) {
     intersection: value => intersect([{ isIntersecting: value }]),
     visibility(value) { document.hidden = value; documentEvents.visibilitychange(); },
     context(value) { contextLost = value; nodes.portraitCanvas.fire(value ? 'webglcontextlost' : 'webglcontextrestored'); },
+    portfolioReady() { if (nodes.bootScreen) nodes.bootScreen.hidden = true; (windowEvents['portfolio:ready'] || []).forEach(callback => callback()); },
     finishImages() { imageCallbacks.splice(0).forEach(callback => callback()); }
   };
 }
@@ -137,20 +142,29 @@ function assertStill(p) {
   assert.equal(p.pending, 0);
 }
 
-test('a held drag renders a localized pull, then springs back with no permanent RAF', () => {
+test('a large mouse drag stretches farther and rebounds elastically before automatic acts resume', () => {
   const p = portrait();
-  p.pointer('pointerdown'); p.pointer('pointermove', { clientX: 220 }); p.run(12);
-  assert.ok(p.draws.at(-1).pull[0] > 0.10);
+  p.pointer('pointerdown'); p.pointer('pointermove', { clientX: 300 }); p.advance(600);
+  assert.ok(p.draws.at(-1).pull[0] > 0.25, 'new pull must be visibly greater than the old .14 limit');
   assert.deepEqual(p.draws.at(-1).grab, [0.5, 140 / 320]);
   assert.equal(p.draws.at(-1).state, 'dragging');
-  assert.equal(p.portraitHint.textContent, 'Pull, then let go.');
-  p.pointer('pointerup'); p.settle();
+  p.pointer('pointerup');
+  const released = p.draws.length; p.settle();
+  assert.ok(p.draws.slice(released).some(draw => draw.pull[0] < -0.015), 'soft spring must overshoot on release');
   assert.deepEqual(p.draws.at(-1).pull, [0, 0]);
   assert.equal(p.pendingFrames, 0);
-  assert.equal(p.pendingTimers, 1, 'one future attention timer is allowed');
+  p.advance(2800);
+  assert.ok(p.draws.some(draw => draw.time > 3000 && draw.state === 'raising-brows'), 'automatic personality resumes after the visitor lets go');
 });
 
-test('mouse, touch, and keyboard tugs include an expression and settle', () => {
+test('diagonal dragging remains bounded while allowing a larger elastic grip', () => {
+  const p = portrait(); p.pointer('pointerdown');
+  p.pointer('pointermove', { clientX: 900, clientY: 900 }); p.advance(1500);
+  const pull = p.draws.at(-1).pull;
+  assert.ok(Math.hypot(...pull) > 0.32 && Math.hypot(...pull) < 0.35);
+});
+
+test('mouse, touch, and keyboard tugs still include an expression and settle', () => {
   for (const mode of ['mouse', 'touch', 'keyboard']) {
     const p = portrait({ coarse: mode === 'touch' });
     if (mode !== 'keyboard') { p.pointer('pointerdown', { pointerType: mode }); p.pointer('pointerup', { pointerType: mode }); }
@@ -158,15 +172,13 @@ test('mouse, touch, and keyboard tugs include an expression and settle', () => {
     assert.ok(p.draws.at(-1).pull[0] > 0.015, mode);
     assert.ok(p.draws.at(-1).surprise > 0.2, mode);
     assert.equal(p.portraitHint.textContent, 'Hello from behind the terminal.');
-    p.settle();
-    assert.deepEqual(p.draws.at(-1).pull, [0, 0]);
-    assert.equal(p.draws.at(-1).surprise, 0);
+    p.settle(); assert.deepEqual(p.draws.at(-1).pull, [0, 0]);
     assert.equal(p.pendingFrames, 0);
     if (mode === 'touch') assert.equal(p.portraitHint.textContent, 'Tap or drag to say hello.');
   }
 });
 
-test('drag completion and canceled touch scrolling suppress their synthetic click only', () => {
+test('drag completion and canceled touch scrolling suppress only their synthetic click', () => {
   for (const end of ['pointerup', 'pointercancel', 'lostpointercapture']) {
     const p = portrait(); p.pointer('pointerdown');
     if (end === 'pointerup') { p.pointer('pointermove', { clientX: 220 }); p.run(5); }
@@ -186,68 +198,74 @@ test('duplicate visibility observations preserve a drag; hiding cancels capture 
   p.visibility(false); assert.deepEqual(p.draws.at(-1).pull, [0, 0]);
 });
 
-test('reduced motion and blocked WebGL show only the still photo and load no expressions', () => {
-  for (const options of [{ reduced: true }, { unavailable: true }, { blocked: true }]) {
-    const p = portrait(options); assertStill(p); assert.equal(p.imageLoads, 0);
+test('the first eyebrow act starts promptly, without waiting for a pointer event', () => {
+  const p = portrait(); p.advance(600);
+  assert.ok(p.draws.some(draw => draw.state === 'raising-brows' && draw.time <= 300));
+  assert.ok(p.draws.at(-1).brows > 0.5);
+  p.advance(700); assert.ok(p.draws.some(draw => draw.blink >= 1));
+});
+
+test('boot loading preloads expressions but starts the first visible act after portfolio ready', () => {
+  const p = portrait({ booting: true });
+  assert.equal(p.imageLoads, 5);
+  p.advance(5000);
+  assert.equal(p.pending, 0);
+  assert.ok(!p.draws.some(draw => draw.brows > 0));
+  p.portfolioReady(); p.advance(400);
+  assert.ok(p.draws.some(draw => draw.state === 'raising-brows' && draw.time <= 5250));
+});
+
+test('without input every requested act appears and the cycle repeats with short rests', () => {
+  const p = portrait(); p.advance(51000);
+  for (const name of ['raising-brows', 'scratching', 'yawning', 'laughing', 'dozing', 'waking', 'demonstrating']) {
+    const starts = p.draws.filter((draw, index) => draw.state === name && (!index || p.draws[index - 1].state !== name));
+    assert.ok(starts.length >= 2, name + ' must recur without input');
+    assert.ok(starts[0].time < 21000, name + ' must be in the first continuous cycle');
   }
+  assert.ok(p.draws.some(draw => draw.yawn > 0.95));
+  assert.ok(p.draws.some(draw => draw.laugh > 0.95));
+  assert.ok(p.draws.some(draw => draw.state === 'dozing' && draw.blink > 0.95));
+  assert.ok(p.draws.some(draw => draw.state === 'waking' && draw.surprise > 0.8));
+  assert.ok(p.draws.some(draw => draw.state === 'demonstrating' && draw.demo[0] < -0.11));
+  const gaps = p.draws.slice(1).map((draw, index) => draw.time - p.draws[index].time);
+  assert.ok(Math.max(...gaps) <= 800, 'visible animation must not disappear into multi-second idle gaps');
 });
 
-test('runtime motion changes and context loss recover without stranded capture', () => {
-  const p = portrait(); p.pointer('pointerdown'); p.pointer('pointermove', { clientX: 220 }); p.run(4);
-  p.motion.matches = true; p.motion.change(); assertStill(p); assert.equal(p.captured.size, 0);
-  p.motion.matches = false; p.motion.change(); assert.equal(p.portraitControl.disabled, false);
-  p.context(true); assertStill(p); p.context(false); assert.equal(p.portraitControl.disabled, false);
-  p.click(0); p.run(5); assert.ok(p.draws.at(-1).pull[0] > 0.015);
+test('the automatic cursor scratches back and forth several times on the cheek', () => {
+  const p = portrait(); p.advance(6500);
+  const strokes = p.draws.filter(draw => draw.state === 'scratching' && Math.abs(draw.demo[1]) > 0.002);
+  let reversals = 0;
+  for (let i = 1; i < strokes.length; i++) if (Math.sign(strokes[i].demo[1]) !== Math.sign(strokes[i - 1].demo[1])) reversals++;
+  assert.ok(reversals >= 6, 'four clear scratching strokes must reverse direction repeatedly');
 });
 
-test('without input the portrait fully blinks, demonstrates a cheek pull, then stops rendering', () => {
-  const p = portrait(); p.advance(4500);
-  assert.ok(p.draws.some(draw => draw.blink >= 1), 'blink must reach a fully closed blend');
-  assert.ok(p.draws.some(draw => draw.demo[0] < -0.05));
-  assert.equal(p.heroPortrait.classList.contains('is-demonstrating'), true);
-  assert.equal(p.portraitHint.textContent, 'Try pulling my cheek.');
-  const x = parseFloat(p.heroPortrait.style.getPropertyValue('--ghost-x'));
-  assert.ok(x >= 24 && x <= 36, 'ghost must follow the cheek inside the portrait');
-  p.advance(2500); p.settle();
-  assert.equal(p.heroPortrait.classList.contains('is-demonstrating'), false);
-  assert.equal(p.pendingFrames, 0);
-  const count = p.draws.length; p.advance(1000); assert.equal(p.draws.length, count);
-});
-
-test('later idle routines include glances and dozing with a surprised wake-up', () => {
-  const p = portrait(); p.advance(38000);
-  assert.ok(p.draws.some(draw => draw.state === 'looking' && Math.abs(draw.look[0]) > 0.01));
-  assert.ok(p.draws.some(draw => draw.state === 'dozing' && draw.blink > 0.9));
-  assert.ok(p.draws.some(draw => draw.state === 'dozing' && draw.surprise > 0.4));
-});
-
-test('mouse motion follows the cursor, settles while held, and ignores touch hover', () => {
+test('passive mouse motion follows the cursor without canceling the continuous acts', () => {
   const p = portrait();
-  p.windowEvent('pointermove', { pointerType: 'mouse', clientX: 80, clientY: 80 }); p.settle();
-  assert.ok(p.draws.at(-1).look[0] < -0.002);
-  assert.equal(p.pendingFrames, 0);
+  for (let i = 0; i < 1500; i++) {
+    p.windowEvent('pointermove', { pointerType: 'mouse', clientX: i % 2 ? 80 : 250, clientY: 120 });
+    p.step();
+  }
+  for (const name of ['raising-brows', 'scratching', 'yawning', 'laughing', 'dozing', 'waking']) assert.ok(p.draws.some(draw => draw.state === name), name);
+  assert.ok(p.draws.some(draw => Math.abs(draw.look[0]) > 0.002));
   const last = p.draws.at(-1).look;
-  p.windowEvent('pointermove', { pointerType: 'touch', clientX: 250, clientY: 250 });
-  assert.deepEqual(p.draws.at(-1).look, last); assert.equal(p.pendingFrames, 0);
-  p.windowEvent('pointermove', { pointerType: 'mouse', clientX: 250, clientY: 200 }); p.settle();
-  assert.ok(p.draws.at(-1).look[0] > 0.002);
-  p.windowEvent('pointerout', { relatedTarget: null }); p.settle();
-  assert.deepEqual(p.draws.at(-1).look, [0, 0]);
+  p.windowEvent('pointermove', { pointerType: 'touch', clientX: 10, clientY: 10 });
+  assert.deepEqual(p.draws.at(-1).look, last);
 });
 
-test('visitor input immediately owns the face and cancels an automatic demonstration', () => {
-  const p = portrait(); p.advance(4000);
+test('grabbing immediately takes control from an automatic scratch or demonstration', () => {
+  const p = portrait(); p.advance(4500);
   assert.equal(p.heroPortrait.classList.contains('is-demonstrating'), true);
   p.pointer('pointerdown'); p.run(1);
   assert.equal(p.heroPortrait.classList.contains('is-demonstrating'), false);
+  assert.equal(p.heroPortrait.classList.contains('is-scratching'), false);
   assert.deepEqual(p.draws.at(-1).demo, [0, 0]);
-  p.pointer('pointermove', { clientX: 220 }); p.run(10);
-  assert.ok(p.draws.at(-1).pull[0] > 0.10); assert.deepEqual(p.draws.at(-1).demo, [0, 0]);
+  p.pointer('pointermove', { clientX: 280 }); p.run(15);
+  assert.ok(p.draws.at(-1).pull[0] > 0.25); assert.deepEqual(p.draws.at(-1).demo, [0, 0]);
 });
 
-test('idle work stops entirely offscreen, in a hidden tab, or after blur', () => {
+test('automatic work stops completely when inactive and resumes promptly when visible', () => {
   for (const mode of ['offscreen', 'hidden', 'blur']) {
-    const p = portrait(); p.advance(4000);
+    const p = portrait(); p.advance(4500);
     if (mode === 'offscreen') p.intersection(false);
     if (mode === 'hidden') p.visibility(true);
     if (mode === 'blur') p.windowEvent('blur');
@@ -256,26 +274,40 @@ test('idle work stops entirely offscreen, in a hidden tab, or after blur', () =>
     if (mode === 'offscreen') p.intersection(true);
     if (mode === 'hidden') p.visibility(false);
     if (mode === 'blur') p.windowEvent('focus');
-    assert.equal(p.pendingTimers, 1, mode + ' resumes a delayed idle routine');
+    p.advance(400);
+    assert.ok(p.draws.some(draw => draw.time >= 34500 && draw.state !== 'idle'), mode + ' resumes an act within400ms');
   }
 });
 
-test('failed or missing expression assets never replace the working base portrait', () => {
+test('reduced motion and blocked WebGL retain only the still portrait', () => {
+  for (const options of [{ reduced: true }, { unavailable: true }, { blocked: true }]) {
+    const p = portrait(options); assertStill(p); assert.equal(p.imageLoads, 0);
+  }
+});
+
+test('runtime motion changes and context loss recover without stranded pointer capture', () => {
+  const p = portrait(); p.pointer('pointerdown'); p.pointer('pointermove', { clientX: 220 }); p.run(4);
+  p.motion.matches = true; p.motion.change(); assertStill(p); assert.equal(p.captured.size, 0);
+  p.motion.matches = false; p.motion.change(); assert.equal(p.portraitControl.disabled, false);
+  p.context(true); assertStill(p); p.context(false); assert.equal(p.portraitControl.disabled, false);
+  p.click(0); p.run(5); assert.ok(p.draws.at(-1).pull[0] > 0.015);
+});
+
+test('failed expression downloads or uploads retain valid base samplers and dragging', () => {
   for (const options of [{ noExpressions: true }, { expressionFailure: true }, { optionalUploadFails: true }, { optionalUploadThrows: true }]) {
     const p = portrait(options); p.advance(1000);
     assert.equal(p.portraitControl.disabled, false);
-    assert.ok(p.draws.every(draw => draw.blink === 0));
-    assert.equal(p.units[0], p.units[1]); assert.equal(p.units[0], p.units[2]);
+    assert.ok(p.draws.every(draw => draw.blink === 0 && draw.brows === 0 && draw.yawn === 0 && draw.laugh === 0));
+    for (let unit = 1; unit <= 5; unit++) assert.equal(p.units[0], p.units[unit]);
     assert.equal(p.activeUnit, 0);
     p.click(); p.run(8); assert.ok(p.draws.at(-1).pull[0] > 0.015);
   }
 });
 
-test('expressions load only when motion is allowed and stale async loads cannot revive a lost context', () => {
+test('optional faces load only when allowed and stale context callbacks cannot revive the canvas', () => {
   const p = portrait({ reduced: true }); assert.equal(p.imageLoads, 0);
-  p.motion.matches = false; p.motion.change(); assert.equal(p.imageLoads, 2);
-  const delayed = portrait({ delayedExpressions: true }); delayed.context(true); delayed.finishImages();
-  assertStill(delayed);
-  delayed.context(false); delayed.finishImages(); delayed.advance(1000);
+  p.motion.matches = false; p.motion.change(); assert.equal(p.imageLoads, 5);
+  const delayed = portrait({ delayedExpressions: true }); delayed.context(true); delayed.finishImages(); assertStill(delayed);
+  delayed.context(false); delayed.finishImages(); delayed.advance(1400);
   assert.ok(delayed.draws.some(draw => draw.blink >= 1));
 });

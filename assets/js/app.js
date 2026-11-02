@@ -56,6 +56,7 @@
         screen.hidden = true;
         screen.setAttribute('aria-busy', 'false');
         document.body.style.overflow = '';
+        window.dispatchEvent(new Event('portfolio:ready'));
       }, reduceMotion ? 0 : 280);
     }
 
