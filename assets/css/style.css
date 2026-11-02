@@ -213,8 +213,45 @@ ul{margin:0;padding:0;list-style:none}
 .hero-details{animation:hero-reveal .48s cubic-bezier(.2,.7,.2,1) .23s both}
 @keyframes hero-reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-.hero-role{margin-top:40px;color:var(--paper);font-size:clamp(15px,1.9vw,19px)}
+.hero-layout{
+  display:grid;grid-template-columns:minmax(0,1fr) clamp(300px,30vw,360px);
+  align-items:center;gap:32px;margin-top:40px;
+}
+.hero-details{min-width:0}
+.hero-role{color:var(--paper);font-size:clamp(15px,1.6vw,18px);line-height:1.6}
 .hero-focus{margin-top:7px;color:var(--muted);font-size:13.5px}
+
+/* The still portrait remains available when motion or WebGL is unavailable. */
+.hero-portrait{
+  min-width:0;width:100%;align-self:center;
+  animation:hero-reveal .48s cubic-bezier(.2,.7,.2,1) .3s both;
+}
+.portrait-control{
+  position:relative;display:block;width:100%;aspect-ratio:1;
+  padding:0;border:0;border-radius:4px;background:transparent;
+  -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;
+}
+.portrait-control::before{
+  content:"";position:absolute;inset:12% 10% 8%;z-index:-1;
+  background:radial-gradient(ellipse,rgba(0,255,156,.055),transparent 68%);
+}
+.portrait-control img,.portrait-control canvas{
+  display:block;width:100%;height:100%;object-fit:contain;
+  -webkit-mask-image:linear-gradient(#000 80%,transparent 100%);
+  mask-image:linear-gradient(#000 80%,transparent 100%);
+}
+.portrait-control canvas{position:absolute;inset:0;visibility:hidden;pointer-events:none}
+.hero-portrait.is-ready canvas{visibility:visible}
+.hero-portrait.is-ready img{opacity:0}
+.hero-portrait.is-interactive .portrait-control{cursor:grab;touch-action:pan-y}
+.hero-portrait.is-dragging .portrait-control{cursor:grabbing}
+.portrait-control:focus-visible{outline:1px dashed var(--green);outline-offset:5px}
+.hero-portrait figcaption{
+  min-height:1.5em;margin-top:12px;text-align:center;
+  color:var(--muted);font-size:11px;line-height:1.5;letter-spacing:.04em;
+}
+.hero-portrait.is-interactive figcaption::before{content:"> ";color:var(--green)}
+.hero-portrait.is-dragging figcaption{color:var(--green)}
 
 .current{display:grid;gap:8px;margin-top:54px}
 .current>span{color:var(--slate);font-size:11.5px;letter-spacing:.18em}
@@ -456,6 +493,10 @@ ul{margin:0;padding:0;list-style:none}
    responsive
    ============================================================ */
 @media (max-width:900px){
+  .hero-layout{grid-template-columns:minmax(0,1fr) 280px;gap:24px}
+  .hero-role{font-size:16px}
+  .current p{font-size:13.5px;line-height:1.6}
+  .availability div{grid-template-columns:98px minmax(0,1fr);gap:12px}
   .process-window{display:block;min-height:0;overflow:visible;border:0;background:transparent}
   .process-list{border:1px solid var(--line);border-radius:5px;background:var(--surface)}
   .inspector{margin-top:16px;border:1px solid var(--line);border-radius:5px;background:var(--surface)}
@@ -485,7 +526,12 @@ ul{margin:0;padding:0;list-style:none}
   .hero,.terminal-section{padding-right:18px;padding-left:18px}
   .hero{padding-top:110px}
   .ascii-name{font-size:clamp(2.6px,1.38vw,8px)}
-  .hero-role{margin-top:30px}
+  .hero-layout{grid-template-columns:minmax(0,1fr);gap:30px;margin-top:30px}
+  .hero-portrait{width:min(100%,320px);justify-self:center}
+  .hero-role{font-size:16px}
+  .current{margin-top:36px}
+  .availability{margin-top:30px}
+  .hero-actions{margin-top:32px}
   .availability div{grid-template-columns:98px minmax(0,1fr);gap:12px}
   .hero-actions a{padding:12px 15px;font-size:12px}
   .hero-actions>span{width:100%;margin:0}

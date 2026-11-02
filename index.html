@@ -90,6 +90,7 @@
                              ░██
                        ░███████</span></h1>
 
+  <div class="hero-layout">
   <div class="hero-details">
     <p class="hero-role">Security Engineer &middot; Offensive Security &amp; AI Systems</p>
     <p class="hero-focus">Penetration Testing &bull; Red Team &bull; API Security &bull; AI</p>
@@ -106,13 +107,23 @@
       <div><dt>SEEKING</dt><dd>Security Engineer / Red Team / Penetration Testing</dd></div>
       <div><dt>AVAILABLE</dt><dd>Now &middot; remote or relocation</dd></div>
     </dl>
+  </div>
+
+  <figure class="hero-portrait" id="heroPortrait">
+    <button class="portrait-control" id="portraitControl" type="button" disabled aria-label="Interactive portrait of Kayemba. Drag to stretch, or use the arrow keys. Press Escape to reset." aria-describedby="portraitHint portraitKeyboardHint">
+      <img id="portraitImage" src="assets/images/kayemba-portrait.webp" width="900" height="900" alt="Kayemba smiling, wearing clear glasses and a black sweater." fetchpriority="high" draggable="false">
+      <canvas id="portraitCanvas" width="900" height="900" aria-hidden="true"></canvas>
+    </button>
+    <figcaption id="portraitHint">A face behind the terminal.</figcaption>
+    <span class="sr-only" id="portraitKeyboardHint">Press Enter or Space for a playful tug. Use the arrow keys to stretch the portrait, and Escape to reset.</span>
+  </figure>
+  </div>
 
     <div class="hero-actions">
       <a href="#about">[ ENTER PORTFOLIO ]</a>
       <a class="secondary" href="assets/Kayemba_Hamiidu_Security_Engineer_Resume.pdf" target="_blank" rel="noopener">[ RESUME &darr; ]</a>
       <span>or scroll &darr;</span>
     </div>
-  </div>
 </section>
 
 <!-- ABOUT -->
@@ -529,5 +540,6 @@
 <script src="assets/js/visitors.js" defer></script>
 <script src="assets/js/hc-actions.js" defer></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/avatar.js" defer></script>
 </body>
 </html>
